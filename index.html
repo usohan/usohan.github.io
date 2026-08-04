@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sohan Gottipati</title>
+    <meta name="description" content="Sohan Gottipati — Computer Science with Business Applications student at UC Riverside." />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #14181b;
+        --sub: #57636c;
+        --card: #f6f8f9;
+        --border: #e2e6e8;
+        --accent: #1e93d6;
+        --accent2: #1fa971;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --ink: #f0f3f5;
+          --sub: #9aa7ad;
+          --card: #151b22;
+          --border: #232b33;
+          --accent: #5ac0f2;
+          --accent2: #3fd68c;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 96px 24px 64px;
+      }
+      .eyebrow {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+      h1 {
+        font-size: clamp(32px, 6vw, 48px);
+        line-height: 1.1;
+        margin: 0 0 20px;
+        letter-spacing: -0.02em;
+      }
+      p.intro {
+        font-size: 18px;
+        color: var(--sub);
+        max-width: 58ch;
+        margin: 0 0 8px;
+      }
+      section.projects {
+        margin-top: 72px;
+      }
+      h2 {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--sub);
+        margin: 0 0 20px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 16px;
+        padding: 28px;
+      }
+      .card h3 {
+        margin: 0 0 6px;
+        font-size: 24px;
+        letter-spacing: -0.01em;
+      }
+      .card .tagline {
+        color: var(--accent2);
+        font-weight: 600;
+        font-size: 14px;
+        margin: 0 0 16px;
+      }
+      .card p {
+        color: var(--sub);
+        margin: 0 0 20px;
+        font-size: 15px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .tags span {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--sub);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px 12px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent);
+        color: #04141a;
+        font-weight: 700;
+        font-size: 14px;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 999px;
+      }
+      .btn:hover { opacity: 0.9; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="eyebrow">Hello, world</span>
+      <h1>Sohan Gottipati</h1>
+      <p class="intro">
+        My name is Sohan Gottipati and I am a current student at the University of California,
+        Riverside majoring in Computer Science with Business Applications. Below you can check
+        out some of my projects!
+      </p>
+
+      <section class="projects">
+        <h2>Featured Project</h2>
+        <div class="card">
+          <h3>Studispot</h3>
+          <p class="tagline">Find your next favorite study spot</p>
+          <p>
+            A Beli-style app for ranking study spots through head-to-head comparisons.
+            Every duel refines an Elo-based score, so recommendations reflect real
+            community consensus — down to the time of day you're studying.
+          </p>
+          <div class="tags">
+            <span>React Native</span>
+            <span>Expo</span>
+            <span>Supabase</span>
+            <span>PostgreSQL</span>
+          </div>
+          <a class="btn" href="https://demo.s0han.me" target="_blank" rel="noopener">
+            View Live Demo →
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
