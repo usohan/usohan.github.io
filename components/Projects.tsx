@@ -4,7 +4,7 @@ const TAGS = ['React Native', 'Expo', 'Supabase', 'PostgreSQL'];
 
 export function Projects() {
   return (
-    <section className="mx-auto max-w-[760px] border-t border-[var(--border)] px-6 py-24">
+    <section id="projects" className="mx-auto max-w-[760px] border-t border-[var(--border)] px-6 py-24">
       <Reveal>
         <h2 className="mb-6 text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--sub)]">Projects</h2>
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-7">

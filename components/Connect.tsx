@@ -2,7 +2,7 @@ import { Reveal } from '@/components/Reveal';
 
 export function Connect() {
   return (
-    <section className="mx-auto max-w-[760px] border-t border-[var(--border)] px-6 py-24">
+    <section id="connect" className="mx-auto max-w-[760px] border-t border-[var(--border)] px-6 py-24">
       <Reveal>
         <h2 className="mb-6 text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--sub)]">Connect</h2>
         <div className="flex flex-wrap gap-3">

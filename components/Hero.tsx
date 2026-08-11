@@ -29,7 +29,7 @@ export function Hero() {
         <p className="mb-3.5 text-[13px] font-bold uppercase tracking-[0.1em] opacity-75">
           Computer Science · UC Riverside
         </p>
-        <h1 className="mb-5 font-serif text-[clamp(36px,7vw,64px)] italic leading-[1.05] tracking-[-0.01em]">
+        <h1 className="mb-5 font-serif text-[clamp(36px,7vw,64px)] font-semibold leading-[1.05] tracking-[-0.01em]">
           Hi, I&rsquo;m Sohan Gottipati.
         </h1>
         <p className="max-w-[56ch] text-[17px] leading-relaxed opacity-90">
