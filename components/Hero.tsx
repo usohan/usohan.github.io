@@ -1,19 +1,10 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { useThemeStore } from '@/store/theme';
 
-const Sky = dynamic(() => import('@/components/scene/Sky').then((m) => m.Sky), { ssr: false });
+const SPLINE_SCENE_URL = 'https://my.spline.design/metagestalt-3gjmL4CbfxBHjZel9x4bC5K9/';
 
 export function Hero() {
-  const theme = useThemeStore((s) => s.theme);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
   return (
     <div
       className="relative m-3 flex min-h-[calc(100svh-24px)] flex-col justify-end overflow-hidden rounded-[20px] border border-white/35"
@@ -21,7 +12,17 @@ export function Hero() {
         background: 'linear-gradient(180deg, var(--sky-a) 0%, var(--sky-b) 100%)',
         color: 'var(--sky-ink)',
       }}>
-      {mounted && <Sky dark={theme === 'dark'} />}
+      <iframe
+        src={SPLINE_SCENE_URL}
+        title="3D landing scene"
+        className="absolute inset-0 h-full w-full border-0"
+        loading="lazy"
+      />
+
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-[55%]"
+        style={{ background: 'linear-gradient(180deg, transparent 0%, var(--sky-b) 85%)', opacity: 0.55 }}
+      />
 
       <ThemeToggle />
 
