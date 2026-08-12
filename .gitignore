@@ -22,3 +22,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# local design-tool installs (not part of the site)
+/.github/agents/
+/.github/hooks/
+/.github/skills/
