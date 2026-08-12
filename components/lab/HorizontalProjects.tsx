@@ -36,21 +36,43 @@ export function HorizontalProjects() {
     const track = trackRef.current;
     if (!section || !track) return;
 
-    // A horizontal scroll-jack is heavy, sustained motion -- reduced-motion
-    // users get the CSS fallback (stacked vertically) instead of a gentler version.
+    // A horizontal scroll-jack plus per-panel swipes is heavy, sustained
+    // motion -- reduced-motion users get the CSS fallback (stacked
+    // vertically, static text) instead of a gentler version of the same thing.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const panelEls = Array.from(track.children) as HTMLElement[];
+    const textEls = panelEls.map((panel) => panel.querySelector<HTMLElement>('[data-panel-text]'));
 
     const ctx = gsap.context(() => {
       const distance = track.scrollWidth - section.clientWidth;
-      gsap.to(track, {
-        x: -distance,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${distance}`,
-          scrub: true,
-          pin: true,
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${distance}`,
+        scrub: true,
+        pin: true,
+        onUpdate: (self) => {
+          const trackX = -distance * self.progress;
+          gsap.set(track, { x: trackX });
+
+          // Each panel's text swipes in from alternating sides as its card
+          // nears center, and swipes back out the same way as it leaves --
+          // a directional cue for "this card is arriving / departing".
+          const viewportCenter = -trackX + section.clientWidth / 2;
+          panelEls.forEach((panel, i) => {
+            const textEl = textEls[i];
+            if (!textEl) return;
+            const panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
+            const delta = panelCenter - viewportCenter;
+            const proximity = gsap.utils.clamp(0, 1, 1 - Math.abs(delta) / panel.offsetWidth);
+            const direction = i % 2 === 0 ? 1 : -1; // alternate left-to-right / right-to-left
+            gsap.set(textEl, {
+              x: (1 - proximity) * direction * 70,
+              opacity: 0.15 + 0.85 * proximity,
+            });
+          });
         },
       });
     }, section);
@@ -70,19 +92,21 @@ export function HorizontalProjects() {
         {PANELS.map((panel) => (
           <div
             key={panel.kicker}
-            className="flex w-[min(82vw,560px)] shrink-0 flex-col justify-center rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.1em] text-[var(--accent2)]">{panel.kicker}</p>
-            <h3 className="mb-3 text-2xl tracking-[-0.01em] text-[var(--ink)]">{panel.title}</h3>
-            <p className="text-[15px] leading-relaxed text-[var(--sub)]">{panel.body}</p>
-            {panel.cta && (
-              <a
-                href="https://demo.sohan.website"
-                target="_blank"
-                rel="noopener"
-                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-bold text-[#04141a] transition-transform duration-150 ease-out hover:opacity-90 active:scale-[0.97]">
-                View Live Demo →
-              </a>
-            )}
+            className="flex w-[min(82vw,560px)] shrink-0 flex-col justify-center overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8">
+            <div data-panel-text>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.1em] text-[var(--accent2)]">{panel.kicker}</p>
+              <h3 className="mb-3 text-2xl tracking-[-0.01em] text-[var(--ink)]">{panel.title}</h3>
+              <p className="text-[15px] leading-relaxed text-[var(--sub)]">{panel.body}</p>
+              {panel.cta && (
+                <a
+                  href="https://demo.sohan.website"
+                  target="_blank"
+                  rel="noopener"
+                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-bold text-[#04141a] transition-transform duration-150 ease-out hover:opacity-90 active:scale-[0.97]">
+                  View Live Demo →
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>
